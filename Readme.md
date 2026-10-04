@@ -30,7 +30,7 @@ A clean, simple Flask web app that helps groups split bills fairly — no more a
 ## ⚡ Live Demo
 
 👉 **Try it here:**
-[https://bill-splitter-t26y.onrender.com](https://bill-splitter-t26y.onrender.com)
+[https://bill-splitter-aov3.onrender.com/](https://bill-splitter-aov3.onrender.com/)
 
 ---
 
