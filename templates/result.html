@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Splitter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="container">
+    <h1>💰 Bill Summary</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if payments %}
+
+      <!-- Summary Card -->
+      <div class="card">
+        <h2>Overview</h2>
+        <p><strong>Total:</strong> Ksh {{ "%.2f"|format(total) }}</p>
+        <p><strong>Each should pay:</strong> Ksh {{ "%.2f"|format(share) }}</p>
+      </div>
+
+      <!-- Payments Card -->
+      <div class="card">
+        <h2>All Payments</h2>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Amount (Ksh)</th>
+          </tr>
+          {% for p in payments %}
+          <tr>
+            <td>{{ p.name }}</td>
+            <td>{{ "%.2f"|format(p.amount) }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <!-- Transactions Card -->
+      <div class="card">
+        <h2>Who Pays Whom</h2>
+
+        {% if transactions %}
+          <ul>
+            {% for t in transactions %}
+              <li>{{ t }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="empty">Everyone is settled ✅</p>
+        {% endif %}
+      </div>
+
+    {% else %}
+      <div class="card">
+        <p class="empty">No payments yet. Add some above!</p>
+      </div>
+    {% endif %}
+
+    <!-- Actions -->
+    <div class="card">
+      <a href="/" class="btn btn-primary">➕ Add More</a>
+
+      <!-- Fixed: changed to POST to prevent accidental resets -->
+      <form action="/reset" method="post" style="display:inline;"
+        onsubmit="return confirm('Clear all payments?');">
+        <button class="btn btn-danger">🗑 Clear All</button>
+      </form>
+    </div>
+
+  </div>
+
+</body>
+</html>

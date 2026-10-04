@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}New Bill{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>New Bill</h1>
+  <form action="/bill/new" method="post">
+    <label>Bill name</label>
+    <input type="text" name="name" placeholder="e.g. Nairobi Trip, Dinner at Java" required>
+    <label>Currency</label>
+    <select name="currency">
+      <option value="KSH">KSH – Kenyan Shilling</option>
+      <option value="USD">USD – US Dollar</option>
+      <option value="EUR">EUR – Euro</option>
+      <option value="GBP">GBP – British Pound</option>
+      <option value="UGX">UGX – Ugandan Shilling</option>
+      <option value="TZS">TZS – Tanzanian Shilling</option>
+    </select>
+    <button type="submit" class="btn btn-primary btn-full">Create Bill</button>
+  </form>
+  <p class="auth-link"><a href="/">← Back to my bills</a></p>
+</div>
+{% endblock %}

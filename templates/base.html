@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Bill Splitter{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="/" class="nav-brand">💰 Bill Splitter</a>
+    {% if current_user.is_authenticated %}
+      <div class="nav-links">
+        <span class="nav-user">👤 {{ current_user.username }}</span>
+        <a href="/bill/new" class="btn btn-sm btn-primary">+ New Bill</a>
+        <a href="/logout" class="btn btn-sm btn-outline">Logout</a>
+      </div>
+    {% endif %}
+  </nav>
+
+  <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>

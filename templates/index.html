@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}My Bills{% endblock %}
+{% block content %}
+
+<div class="page-header">
+  <h1>My Bills</h1>
+  <a href="/bill/new" class="btn btn-primary">+ New Bill</a>
+</div>
+
+{% if bills %}
+  <div class="bills-grid">
+    {% for b in bills %}
+    <div class="bill-card">
+      <div class="bill-card-body">
+        <h3><a href="/bill/{{ b[0] }}">{{ b[1] }}</a></h3>
+        <span class="currency-badge">{{ b[2] }}</span>
+        <p class="bill-date">{{ b[3][:10] }}</p>
+      </div>
+      <div class="bill-card-actions">
+        <a href="/bill/{{ b[0] }}" class="btn btn-sm btn-primary">Open</a>
+        <form action="/bill/{{ b[0] }}/delete" method="post" style="display:inline"
+              onsubmit="return confirm('Delete this bill and all its payments?')">
+          <button class="btn btn-sm btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty-state">
+    <p>No bills yet. Create your first one!</p>
+    <a href="/bill/new" class="btn btn-primary">+ New Bill</a>
+  </div>
+{% endif %}
+
+{% endblock %}
