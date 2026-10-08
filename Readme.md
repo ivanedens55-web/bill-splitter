@@ -156,4 +156,4 @@ Pull requests are welcome. For major changes, open an issue first to discuss.
 
 ## 📄 License
 
-This project is open-source and available under the MIT License.
+This project is open-source and available under the MIT License. See [LICENSE](LICENSE) for details.
